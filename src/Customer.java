@@ -1,4 +1,7 @@
 
+import java.io.PrintWriter;
+
+
 public class Customer {
    
     private int Cus_id;
@@ -17,7 +20,8 @@ public class Customer {
     }
     
     
-       public Customer(String Username,String Password, String Fname, String Lname, String nationality, char gender, int phone) {
+       public Customer(String Username,String Password, String Fname, String Lname, String nationality, char gender,
+               int phone,int Cus_id, PrintWriter print_Writer) {
            
            this.Username = Username;
            this.Password = Password;
@@ -26,11 +30,16 @@ public class Customer {
            this.nationality = nationality;
            this.gender = gender;
            this.phone = phone;
+           this.Cus_id = Cus_id;
            
-           int ran = (int) ( (Math.random() * (999999-100000)) + 100000); 
-           this.Cus_id = ran;
+           print_Writer.append(Username + "," + Password
+                + "," + Fname
+                + "," + Lname
+                + "," + nationality
+                + "," + gender
+                + "," + phone
+                + "," + Cus_id);
            
-
     }
 
     public int getCus_id() {
@@ -77,11 +86,11 @@ public class Customer {
         this.phone = phone;
     }
 
- @Override
-    public String toString() {
-        return "\nCutomer ID :" + Cus_id + "\nCustomer Name :" +" "+ this.Fname+this.Lname  + "\nCutomer nationality :" + this.nationality +
-                "Customer gender :" + this.gender + "Customer phone :" + this.phone;
-    }
+// @Override
+//    public String toString() {
+//        return "\nCutomer ID :" + Cus_id + "\nCustomer Name :" +" "+ this.Fname+this.Lname  + "\nCutomer nationality :" + this.nationality +
+//                "Customer gender :" + this.gender + "Customer phone :" + this.phone;
+//    }
     
     
 }
