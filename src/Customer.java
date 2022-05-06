@@ -42,6 +42,12 @@ public class Customer {
            
     }
 
+    public void addResrvation (){
+        
+        
+        
+        
+    }
     public int getCus_id() {
         return Cus_id;
     }

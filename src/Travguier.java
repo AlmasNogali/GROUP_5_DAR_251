@@ -10,56 +10,70 @@ public class Travguier {
 
     static File Emp_file_info;
     static File Cus_file_info;
-    static ArrayList ranMum;
+    static ArrayList<Integer> ranMum = new ArrayList<Integer>();
     static int count_ran;
 
     public static void main(String[] args) throws FileNotFoundException {
 
-        File Cus_file_info = new File("Cus_info.txt");
-        File Emp_file_info = new File("Emp_info.txt");
+        File Cus_file_info = new File("New_Cus_info.txt");
+        File Emp_file_info = new File("New_Emp_info.txt");
 
         PrintWriter Writer_cus_info = new PrintWriter(Cus_file_info);
         PrintWriter Writer_emp_info = new PrintWriter(Emp_file_info);
 
-        System.out.println("--------------- Welcome to TRAVGUIER System ---------------");
-        System.out.println("Do you have an account?" + "\n Yes or No ?");
-
+//**************************************************************************************************
         Scanner sc = new Scanner(System.in);
-        String user_choise = sc.nextLine();
-        String user = "yes";
-        String user2 = "no";
+        Scanner sc2 = new Scanner(System.in);
+        System.out.println("--------------- Welcome to TRAVGUIER System ---------------");
+        System.out.println("------------------------------------------------------------");
+        System.out.println("1. SignUp Create A New Account.");
+        System.out.println("2. Login To Your Account.");
+        System.out.println("3. Exit.");
+        System.out.println("------------------------------------------------------------");
+        System.out.println("Write The Number Of Process :");
+
+        int user_choise = sc.nextInt();
 
         while (true) {
+            //SignUp
+            if (user_choise == 2) {
 
-            if (user_choise == "y" || user_choise == "Y" || user_choise.equalsIgnoreCase(user)) {
-
-                Login(sc);
+                Login(sc2 , sc);
 
                 break;
-
-            } else if (user_choise.equalsIgnoreCase(user2) || user_choise == "n" || user_choise == "N") {
+            //LogIn
+            } else if (user_choise == 1) {
 
                 System.out.println("Are you a customer(1) or an employee(2) ?");
                 int user_choise2 = sc.nextInt();
 
                 while (true) {
+                    //if customer
                     if (user_choise2 == 1) {
                         SignUp(sc, Writer_cus_info, user_choise2);
+                    //if employee
                     } else if (user_choise2 == 2) {
                         SignUp(sc, Writer_emp_info, user_choise2);
+                        
                     } else {
                         System.out.println("\nPlease choose Againe!\n Are you a customer(1) or an employee(2) ?");
                         user_choise2 = sc.nextInt();
                     }
                 }
 
+            } else if (user_choise == 3) {
+                break;
             } else {
                 System.out.println("Please Try Againe : ");
-                user_choise = sc.nextLine();
+                user_choise = sc.nextInt();
                 continue;
             }
 
         }
+        
+        
+        
+        
 
         Writer_cus_info.flush();
         Writer_cus_info.close();
@@ -67,22 +81,24 @@ public class Travguier {
         Writer_emp_info.close();
     }
 
-    public static void Login(Scanner sc) {
+    public static void Login(Scanner sc, Scanner sc2) {
 
         System.out.println("Are you a customer(1) or an employee(2) ?");
         int user_choise = sc.nextInt();
 
         System.out.println("Please enter your username :");
-        String u_name = sc.nextLine();
+        
+        String UserName = sc.nextLine();
 
         System.out.println("Please enter your Password :");
+        
         String Pword = sc.nextLine();
 
         while (true) {
             if (user_choise == 1) {
-
+                
             } else if (user_choise == 2) {
-
+                
             } else {
                 System.out.println("\nPlease choose Againe!\n Are you a customer(1) or an employee(2) ?");
                 user_choise = sc.nextInt();
@@ -120,11 +136,11 @@ public class Travguier {
 
         if (cho == 1) {
 
-        Customer cu = new Customer(u_name, Pword, Fname, Lname, nationality, gen, phone, ran, print_Writer);
+            Customer cu = new Customer(u_name, Pword, Fname, Lname, nationality, gen, phone, ran, print_Writer);
 
         } else if (cho == 2) {
-            
-        Employee em = new Employee(u_name, Pword, Fname, Lname, nationality, gen, phone, ran, print_Writer);
+
+            Employee em = new Employee(u_name, Pword, Fname, Lname, nationality, gen, phone, ran, print_Writer);
         }
 
     }
@@ -133,15 +149,14 @@ public class Travguier {
         //000000
         int id;
         int random_int = (int) Math.floor(Math.random() * (999999 - 100000 + 1) + 100000);
-        while (true) {
-            if (ranMum.equals(random_int)) {
-                random_int = (int) Math.floor(Math.random() * (999999 - 100000 + 1) + 100000);
-            } else {
-                ranMum.add(count_ran++, random_int);
-                break;
-            }
 
+        for (int i = 0; i < count_ran; i++) {
+            if (ranMum.get(i) == random_int) {
+                random_int = (int) Math.floor(Math.random() * (999999 - 100000 + 1) + 100000);
+                i = 0;
+            }
         }
+        ranMum.add(count_ran++, random_int);
         return id = random_int;
     }
 }

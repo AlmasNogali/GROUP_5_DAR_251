@@ -1,20 +1,20 @@
-KSA Jeddah,Texas Roadhouse
-KSA Jeddah,Khayal Restaurant
-KSA Jeddah,Buntone Burgers
-KSA Jeddah,The Warehouse
-KSA Jeddah,The Alt B Keto
-KSA Jeddah,Tofareya
-KSA Jeddah,Taste of China
-KSA Jeddah,Avo Restaurant
-KSA Jeddah,Indah Asia Kitchen
-KSA Jeddah,The Monkey's Lounge
-KSA Jeddah,Brooklyn 
-KSA Makkah,Makany Cafe
-KSA Makkah,Mado
-KSA Makkah,Shawbr
-KSA Makkah,Kouzi House 
-KSA Makkah,Takwah Restaurant and Cafe
-KSA Makkah,Cup and Brush Cafe
-KSA Makkah,India Discovered
-KSA Makkah,Q Cafe
-KSA Makkah,Chuck E Cheese's
+KSA,Jeddah,Texas Roadhouse
+KSA,Jeddah,Khayal Restaurant
+KSA,Jeddah,Buntone Burgers
+KSA,Jeddah,The Warehouse
+KSA,Jeddah,The Alt B Keto
+KSA,Jeddah,Tofareya
+KSA,Jeddah,Taste of China
+KSA,Jeddah,Avo Restaurant
+KSA,Jeddah,Indah Asia Kitchen
+KSA,Jeddah,The Monkey's Lounge
+KSA,Jeddah,Brooklyn 
+KSA,Makkah,Makany Cafe
+KSA,Makkah,Mado
+KSA,Makkah,Shawbr
+KSA,Makkah,Kouzi House 
+KSA,Makkah,Takwah Restaurant and Cafe
+KSA,Makkah,Cup and Brush Cafe
+KSA,Makkah,India Discovered
+KSA,Makkah,Q Cafe
+KSA,Makkah,Chuck E Cheese's
