@@ -1,14 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 
 import java.io.PrintWriter;
 
-public class Customer   {
+public class Customer {
 
     private int Cus_id;
     private String Username;
@@ -45,13 +38,22 @@ public class Customer   {
 
     }
 
-    public void addResrvation() {
-     
+    public boolean addResrvation(Reservation plan) {
 
-//       
-        
-        
+        Reservation[] p = new Reservation[plan.getR_permonth()];
+
+        if (plan.getbudget() > 0 || plan.getR_permonth() > 0) { //must enter the budget
+            for (int i = 0; i < p.length; i++) {
+                p[i] = plan;
+                return true;
+            }
+           
+
+        }
+        return false;
+
     }
+
     public int getCus_id() {
         return Cus_id;
     }
@@ -102,5 +104,3 @@ public class Customer   {
 //                "Customer gender :" + this.gender + "Customer phone :" + this.phone;
 //    }
 }
-
-

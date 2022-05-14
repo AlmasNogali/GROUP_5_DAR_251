@@ -1,0 +1,46 @@
+
+---------------------------
+Plan ID :919950
+Plan place :jeddah
+Plan budget :2000
+Plane airline:flynas
+---------------------------
+Plan ID :853268
+Plan place :riyadh
+Plan budget :1500
+Plane airline:sausia
+---------------------------
+Plan ID :803639
+Plan place :makkah
+Plan budget :3000
+Plane airline:dlyadeal
+---------------------------
+Plan ID :842305
+Plan place :riyadh
+Plan budget :2500
+Plane airline:saudiagulf
+---------------------------
+Plan ID :914275
+Plan place :hail
+Plan budget :4500
+Plane airline:saudia
+---------------------------
+Plan ID :332942
+Plan place :Qassim
+Plan budget :7000
+Plane airline:Nas
+---------------------------
+Plan ID :690812
+Plan place :Al-Jouf
+Plan budget :3000
+Plane airline:adeal
+---------------------------
+Plan ID :976233
+Plan place :makkah
+Plan budget :3000
+Plane airline:saudia
+---------------------------
+Plan ID :212471
+Plan place :Al-Medina
+Plan budget :3000
+Plane airline:adeal
