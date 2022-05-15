@@ -1,6 +1,8 @@
 
+import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Employee {
 
@@ -35,6 +37,68 @@ public class Employee {
                 + "," + Emp_gender
                 + "," + Emp_phone
                 + "," + Emp_id);
+
+    }
+    
+    public static void EmpSeachExist(Scanner rs, Scanner file, String UserName, String Password) {
+
+        int lineNum = numOfLines(rs);
+        
+        String[][] info = new String[lineNum][];
+
+        for (int i = 0; i < info.length; i++) {
+            String read = file.nextLine();
+            info[i] = read.split(",");
+            if (info[i][0].equalsIgnoreCase(UserName)) {
+                if (info[i][1].equalsIgnoreCase(Password)) {
+                    break;
+                } else {
+                    System.out.println("Wrong Password ! ");
+                }
+
+            }
+        }
+    }
+    
+    
+    public static int numOfLines(Scanner Sc_read_lines) {
+        //_____________________________________________________________________________
+        //     Initialize INt variable inceases by the number of lines.
+        int lenth = 0;
+        //_____________________________________________________________________________
+        //                While loop to go through the input file
+        while (true) {
+            //_____________________________________________________________________________
+            //         If statment to chick if the file has next line.
+            if (Sc_read_lines.hasNext()) {
+
+                //_____________________________________________________________________________
+                //                       Move to the next line.
+                String s = Sc_read_lines.nextLine();
+                //_____________________________________________________________________________
+                //                       Increase the number of lines
+                lenth++;
+                //_____________________________________________________________________________
+                //     Else if the file does not have other line.
+            } else {
+
+                //_____________________________________________________________________________
+                //    Breake if there are no other lines.
+                break;
+            }
+        }
+        //_____________________________________________________________________________
+        //                     Return the Number of lines.
+        return lenth;
+    }
+    
+    
+    public void Login(String Emp_Username, String Emp_Password, Scanner numLines, Scanner raedInfo) throws FileNotFoundException {
+
+        this.Emp_Username = Emp_Username;
+        this.Emp_Password = Emp_Password;
+        
+        EmpSeachExist(numLines, raedInfo, Emp_Username, Emp_Password);
 
     }
 
@@ -101,5 +165,12 @@ public class Employee {
     public void setEmp_phone(long Emp_phone) {
         this.Emp_phone = Emp_phone;
     }
+
+    @Override
+    public String toString() {
+        return "Employee Information \n" + "Employee id : " + Emp_id + ", Employee Username : " + Emp_Username + ", Password : " + Emp_Password + ", First name : " + Emp_Fname + ", Last name : " + Emp_Lname + ", Nationality : " + Emp_nationality + ", Gender : " + Emp_gender + ", Phone : " + Emp_phone ;
+    }
+    
+    
 
 }

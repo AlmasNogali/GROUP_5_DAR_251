@@ -1,5 +1,6 @@
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -8,12 +9,14 @@ import java.io.PrintWriter;
  */
 public class Reservation {
 
+    
     private int plan_id;
     private String place;
     private int budget;
     private String airline;
     private int reaervation_permonth;
-
+    ArrayList< String > ranMum = new ArrayList< String >();
+    
     public Reservation(int id, String place, int budget, String airline, int reaervation_permonth) {
 
         this.plan_id = id;

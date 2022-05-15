@@ -1,5 +1,8 @@
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.Scanner;
 
 public class Customer {
 
@@ -10,14 +13,14 @@ public class Customer {
     private String Lname;
     private String nationality;
     private char gender;
-    private int phone;
+    private String  phone;
 
     public Customer() {
 
     }
 
     public Customer(String Username, String Password, String Fname, String Lname, String nationality, char gender,
-            int phone, int Cus_id, PrintWriter print_Writer) {
+            String phone, int Cus_id, PrintWriter print_Writer) {
 
         this.Username = Username;
         this.Password = Password;
@@ -47,13 +50,88 @@ public class Customer {
                 p[i] = plan;
                 return true;
             }
-           
-
         }
         return false;
 
     }
 
+    public int CusSeachExist(Scanner numLines, Scanner raedInfo, String UserName, String Password) {
+
+        int lineNum = numOfLines(numLines);
+        int there = 0;
+        String[][] info = new String[lineNum][];
+
+        for (int i = 0; i < info.length; i++) {
+            String read = raedInfo.nextLine();
+            info[i] = read.split(",");
+            if (info[i][0].equals(UserName)) {
+                if (info[i][1].equals(Password)) {
+                    there++;
+                    break;
+                } else {
+                    System.out.println("Wrong Password ! ");
+                    break;
+                }
+
+            }else{
+                System.out.println("there is no account by this user :" + UserName + " Please Try Agaiyn !");
+                break;
+            }
+        }
+        
+        return there;
+    }
+
+    public static int numOfLines(Scanner Sc_read_lines) {
+        //_____________________________________________________________________________
+        //     Initialize INt variable inceases by the number of lines.
+        int lenth = 0;
+        //_____________________________________________________________________________
+        //                While loop to go through the input file
+        while (true) {
+            //_____________________________________________________________________________
+            //         If statment to chick if the file has next line.
+            if (Sc_read_lines.hasNext()) {
+
+                //_____________________________________________________________________________
+                //                       Move to the next line.
+                String s = Sc_read_lines.nextLine();
+                //_____________________________________________________________________________
+                //                       Increase the number of lines
+                lenth++;
+                //_____________________________________________________________________________
+                //     Else if the file does not have other line.
+            } else {
+
+                //_____________________________________________________________________________
+                //    Breake if there are no other lines.
+                break;
+            }
+        }
+        //_____________________________________________________________________________
+        //                     Return the Number of lines.
+        return lenth;
+    }
+
+    public int Login(String Username, String Password, Scanner numLines, Scanner raedInfo) throws FileNotFoundException {
+
+        this.Username = Username;
+        this.Password = Password;
+        int exist = CusSeachExist(numLines, raedInfo, Username, Password);
+        
+        return exist;
+
+    }
+
+    public String getUsername() {
+        return Username;
+    }
+
+    public void setUsername(String Username) {
+        this.Username = Username;
+    }
+
+    
     public int getCus_id() {
         return Cus_id;
     }
@@ -90,17 +168,109 @@ public class Customer {
         this.gender = gender;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
-// @Override
-//    public String toString() {
-//        return "\nCutomer ID :" + Cus_id + "\nCustomer Name :" +" "+ this.Fname+this.Lname  + "\nCutomer nationality :" + this.nationality +
-//                "Customer gender :" + this.gender + "Customer phone :" + this.phone;
-//    }
+    public int viewCusReserv(Scanner userFileLine, Scanner UsersInfo) {
+
+        int numOfReserv = 0;
+        
+        int lineNum = numOfLines(userFileLine);
+
+
+        String[][] info = new String[lineNum][];
+
+        for (int i = 0; i < info.length; i++) {
+
+            String read = UsersInfo.nextLine();
+
+            info[i] = read.split(",");
+
+            if (((info[i][0]).equals(this.Username)) && ((info[i][1]).equals(this.Password))) {
+
+                System.out.printf("\n\n Username :%s  \n" , this.Username);
+                System.out.printf(" Password  :%s  \n" , this.Password);
+                System.out.printf(" First name   :%s  \n" , info[i][2].toString());
+                System.out.printf(" Last name   :%s  \n" , info[i][3].toString());
+                System.out.printf(" National number :%s\n" , info[i][4].toString());
+                System.out.printf(" Gender   :%s  \n" , info[i][5].toString() );
+                System.out.printf(" Phone number   :%s  \n" , info[i][6].toString());
+                System.out.printf(" Customer ID   :%s  \n" , info[i][7].toString());
+                System.out.printf(" Plan ID   :%s  \n" , info[i][8].toString());
+                System.out.printf(" Place   :%s  \n" , info[i][9].toString());
+                System.out.printf(" Budget   :%s  \n" , info[i][10].toString());
+                System.out.printf(" Airlane   :%s  \n\n" ,info[i][11].toString());
+                numOfReserv ++;
+            }
+        }
+
+        return numOfReserv;
+    }
+
+    //(sc, Writer_cus_info, ran,u_name, Pword, Fname, Lname,nationality, gen, phone);
+    public void SignUp(Scanner readUser , Scanner gg, Scanner sc, PrintWriter print_Writer, int ran,
+            String u_name,String Pword, String Fname,
+            String Lname, String nationality, char gender, String phone) {
+        
+        //this(u_name, Pword, Fname, Lname, nationality, gender, phone, ran, print_Writer);
+
+        while (true) {
+
+            boolean val = userNSearch(sc, gg, u_name);
+
+            if (val == true) {
+                
+                break;
+                
+            } else {
+
+                System.out.println("Please another username enter username :");
+
+                u_name = sc.next();
+
+                continue;
+            }
+        }
+        
+        print_Writer.append(u_name + "," + Pword
+                + "," + Fname
+                + "," + Lname
+                + "," + nationality
+                + "," + gender
+                + "," + phone
+                + "," + ran);
+        
+        
+        
+    }
+
+    public static boolean userNSearch(Scanner rs, Scanner file, String UserAtribute) {
+
+        int lineNum = numOfLines(rs);
+
+        String[][] info = new String[lineNum][];
+
+        for (int i = 0; i < info.length; i++) {
+            String read = file.nextLine();
+            info[i] = read.split(",");
+            if (info[i][0].equalsIgnoreCase(UserAtribute)) {
+                return false;
+            } 
+
+        }
+
+        return true;
+
+    }
+
+ @Override
+    public String toString() {
+        return "\nCutomer ID :" + Cus_id + "\nCustomer Name :" +" "+ this.Fname+this.Lname  + "\nCutomer nationality :" + this.nationality +
+                "Customer gender :" + this.gender + "Customer phone :" + this.phone;
+    }
 }
