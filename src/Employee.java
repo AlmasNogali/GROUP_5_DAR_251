@@ -13,13 +13,13 @@ public class Employee {
     private String Emp_Lname;
     private String Emp_nationality;
     private char Emp_gender;
-    private String Emp_phone;
+    private long Emp_phone;
 
     public Employee() {
     }
 
     public Employee(String Emp_Username, String Emp_Password, String Emp_Fname, String Emp_Lname, String Emp_nationality,
-             char Emp_gender, String Emp_phone, int Emp_id, PrintWriter print_Writer) {
+             char Emp_gender, long Emp_phone, int Emp_id, PrintWriter print_Writer) {
 
         this.Emp_Username = Emp_Username;
         this.Emp_Password = Emp_Password;
@@ -158,11 +158,11 @@ public class Employee {
         this.Emp_gender = Emp_gender;
     }
 
-    public String getEmp_phone() {
+    public long getEmp_phone() {
         return Emp_phone;
     }
 
-    public void setEmp_phone(String Emp_phone) {
+    public void setEmp_phone(long Emp_phone) {
         this.Emp_phone = Emp_phone;
     }
 
