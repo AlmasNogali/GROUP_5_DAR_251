@@ -119,8 +119,7 @@ public class Customer {
         return lenth;
     }
 
-
-public int Login(String Username, String Password, Scanner numLines, Scanner raedInfo) throws FileNotFoundException {
+    public int Login(String Username, String Password, Scanner numLines, Scanner raedInfo) throws FileNotFoundException {
 
         this.Username = Username;
         this.Password = Password;
@@ -206,7 +205,8 @@ public int Login(String Username, String Password, Scanner numLines, Scanner rae
 
             if (((info[i][0]).equals(this.Username)) && ((info[i][1]).equals(this.Password))) {
 
-                System.out.printf("\n\n Username :%s  \n", this.Username);
+                System.out.println("******************************************************");
+                System.out.printf("\n Username :%s  \n", this.Username);
                 System.out.printf(" Password  :%s  \n", this.Password);
                 System.out.printf(" First name   :%s  \n", info[i][2].toString());
                 System.out.printf(" Last name   :%s  \n", info[i][3].toString());
@@ -218,6 +218,8 @@ public int Login(String Username, String Password, Scanner numLines, Scanner rae
                 System.out.printf(" Destination   :%s  \n", info[i][9].toString());
                 System.out.printf(" Budget   :%s  \n", info[i][10].toString());
                 System.out.printf(" Airlane   :%s  \n\n", info[i][11].toString());
+                System.out.println("******************************************************");
+
                 numOfReserv++;
             }
         }
@@ -265,8 +267,7 @@ public int Login(String Username, String Password, Scanner numLines, Scanner rae
 
         String[][] info = new String[lineNum][];
 
-
-for (int i = 0; i < info.length; i++) {
+        for (int i = 0; i < info.length; i++) {
             String read = file.nextLine();
             info[i] = read.split(",");
             if (info[i][0].equalsIgnoreCase(UserAtribute)) {

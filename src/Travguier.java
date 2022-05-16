@@ -132,7 +132,227 @@ public class Travguier {
                                         break;
                                     }
                                     case 5: {
-                                        break;
+                                        while (true) {
+                                            //Edit reservations
+                                            Scanner Read_Log_cus7 = new Scanner(Log_cus);
+                                            Scanner Read_Log_cus8 = new Scanner(Log_cus);
+                                            custm.viewCusReserv(Read_Log_cus7, Read_Log_cus8);
+                                            Read_Log_cus7.close();
+                                            Read_Log_cus8.close();
+
+                                            System.out.println("Please choose Plan-ID that do you want to edit it : ");
+                                            String cho1 = sc.next();
+
+                                            System.out.println("______________________________________");
+                                            System.out.println("1. Edit Destination.");
+                                            System.out.println("2. Edit Budget.");
+                                            System.out.println("3. Edit Airline.");
+                                            System.out.println("4. Exit.");
+                                            System.out.println("______________________________________");
+
+                                            System.out.println("Please choose from 1 to 3: ");
+                                            int cho = sc.nextInt();
+
+                                            switch (cho) {
+                                                case 1: {//Edit Destination
+                                                    System.out.println("Please enter the new Destination : ");
+                                                    String newDest = sc.next();
+                                                    String newInfoCus = "";
+
+                                                    Scanner Read_Log_cus5 = new Scanner(Log_cus);
+                                                    int lineNum = numOfLines(Read_Log_cus5);
+                                                    Read_Log_cus5.close();
+
+                                                    Scanner UsersInfo = new Scanner(Log_cus);
+                                                    String[][] info = new String[lineNum][];
+                                                    for (int i = 0; i < info.length; i++) {
+                                                        String read = UsersInfo.nextLine();
+
+                                                        info[i] = read.split(",");
+
+                                                        if (cho1.equals(info[i][8]) && info[i][0].equals(custm.getUsername()) && info[i][1].equals(custm.getPassword())) {
+
+                                                            newInfoCus = info[i][0] + "," + info[i][1]
+                                                                    + "," + info[i][2] + "," + info[i][3]
+                                                                    + "," + info[i][4] + "," + info[i][5]
+                                                                    + "," + info[i][6] + "," + info[i][7]
+                                                                    + "," + info[i][8] + "," + newDest
+                                                                    + "," + info[i][10] + "," + info[i][11];
+
+                                                          
+                                                        }
+                                                    }
+                                                    UsersInfo.close();
+                                                    Scanner UsersInfo1 = new Scanner(Log_cus);
+
+                                                    File output = new File("update.txt");
+                                                    PrintWriter updateWr = new PrintWriter(output);
+
+                                                    String ss;
+                                                    String[] chick = new String[lineNum];
+                                                    for (int i = 0; i < lineNum; i++) {
+
+                                                        ss = UsersInfo1.nextLine();
+                                                        chick = ss.split(",");
+
+                                                        if (cho1.equals(info[i][8]) && info[i][0].equals(custm.getUsername()) && info[i][1].equals(custm.getPassword())) {
+
+                                                            updateWr.append(newInfoCus + "\n");
+                                                        } else {
+                                                            updateWr.append(ss + "\n");
+
+                                                        }
+                                                    }
+
+                                                    updateWr.flush();
+                                                    updateWr.close();
+                                                    UsersInfo1.close();
+
+                                                    Log_cus.delete();
+                                                    File trem = new File("Cus_info.txt");
+                                                    output.renameTo(trem);
+
+                                                    break;
+                                                }
+                                                case 2: {//Edit Budget
+                                                    System.out.println("Please enter the new Budget : ");
+                                                    String newBug = sc.next();
+                                                    String newInfoCus = "";
+
+                                                    Scanner Read_Log_cus5 = new Scanner(Log_cus);
+                                                    int lineNum = numOfLines(Read_Log_cus5);
+                                                    Read_Log_cus5.close();
+
+                                                    Scanner UsersInfo = new Scanner(Log_cus);
+                                                    String[][] info = new String[lineNum][];
+                                                    for (int i = 0; i < info.length; i++) {
+                                                        String read = UsersInfo.nextLine();
+
+                                                        info[i] = read.split(",");
+
+                                                        if (cho1.equals(info[i][8]) && info[i][0].equals(custm.getUsername()) && info[i][1].equals(custm.getPassword())) {
+
+                                                            newInfoCus = info[i][0] + "," + info[i][1]
+                                                                    + "," + info[i][2] + "," + info[i][3]
+                                                                    + "," + info[i][4] + "," + info[i][5]
+                                                                    + "," + info[i][6] + "," + info[i][7]
+                                                                    + "," + info[i][8] + "," + info[i][9]
+                                                                    + "," + newBug + "," + info[i][11];
+
+                                                            
+                                                        }
+                                                    }
+                                                    UsersInfo.close();
+                                                    Scanner UsersInfo1 = new Scanner(Log_cus);
+                                                    File output = new File("update.txt");
+                                                    PrintWriter updateWr = new PrintWriter(output);
+
+                                                    String ss;
+                                                    String[] chick = new String[lineNum];
+                                                    for (int i = 0; i < lineNum; i++) {
+
+                                                        ss = UsersInfo1.nextLine();
+                                                        chick = ss.split(",");
+
+                                                        if (cho1.equals(info[i][8]) && info[i][0].equals(custm.getUsername()) && info[i][1].equals(custm.getPassword())) {
+                                                            updateWr.append(newInfoCus + "\n");
+                                                        } else {
+                                                            updateWr.append(ss + "\n");
+
+                                                        }
+                                                    }
+
+                                                    updateWr.flush();
+                                                    updateWr.close();
+                                                    UsersInfo1.close();
+
+                                                    Log_cus.delete();
+                                                    File trem = new File("Cus_info.txt");
+                                                    output.renameTo(trem);
+
+                                                    break;
+                                                }
+                                                case 3: {
+                                                    System.out.println("Please enter the new Airline : ");
+                                                    String newAril = sc.next();
+                                                    String newInfoCus = "";
+
+                                                    Scanner Read_Log_cus5 = new Scanner(Log_cus);
+                                                    int lineNum = numOfLines(Read_Log_cus5);
+                                                    Read_Log_cus5.close();
+
+                                                    Scanner UsersInfo = new Scanner(Log_cus);
+                                                    String[][] info = new String[lineNum][];
+                                                    for (int i = 0; i < info.length; i++) {
+                                                        String read = UsersInfo.nextLine();
+
+                                                        info[i] = read.split(",");
+
+                                                        if (cho1.equals(info[i][8]) && info[i][0].equals(custm.getUsername()) && info[i][1].equals(custm.getPassword())) {
+
+                                                            newInfoCus = info[i][0] + "," + info[i][1]
+                                                                    + "," + info[i][2] + "," + info[i][3]
+                                                                    + "," + info[i][4] + "," + info[i][5]
+                                                                    + "," + info[i][6] + "," + info[i][7]
+                                                                    + "," + info[i][8] + "," + info[i][9]
+                                                                    + "," + info[i][10] + "," + newAril;
+
+                                                           
+                                                        }
+                                                    }
+                                                    UsersInfo.close();
+                                                    Scanner UsersInfo1 = new Scanner(Log_cus);
+                                                    File output = new File("update.txt");
+                                                    PrintWriter updateWr = new PrintWriter(output);
+
+                                                    String ss;
+                                                    String[] chick = new String[lineNum];
+                                                    for (int i = 0; i < lineNum; i++) {
+
+                                                        ss = UsersInfo1.nextLine();
+                                                        chick = ss.split(",");
+
+                                                        if (cho1.equals(info[i][8]) && info[i][0].equals(custm.getUsername()) && info[i][1].equals(custm.getPassword())) {
+                                                            updateWr.append(newInfoCus + "\n");
+                                                        } else {
+                                                            updateWr.append(ss + "\n");
+
+                                                        }
+                                                    }
+
+                                                    updateWr.flush();
+                                                    updateWr.close();
+                                                    UsersInfo1.close();
+
+                                                    Log_cus.delete();
+                                                    File trem = new File("Cus_info.txt");
+                                                    output.renameTo(trem);
+
+                                                    break;
+                                                }
+                                                case 4: {
+
+                                                    break;
+                                                }
+                                                default: {
+                                                    System.out.println("\n\n please choose again !");
+                                                    System.out.println("______________________________________");
+                                                    System.out.println("1. Edit Destination.");
+                                                    System.out.println("2. Edit Budget.");
+                                                    System.out.println("3. Edit Airline.");
+                                                    System.out.println("4. Exit.");
+                                                    System.out.println("______________________________________");
+
+                                                    System.out.println("Please choose from 1 to 3: ");
+                                                    cho = sc.nextInt();
+                                                    continue;
+
+                                                }
+
+                                            }
+
+                                        }
+
                                     }
 
                                     case 6: {
