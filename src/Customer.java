@@ -13,7 +13,7 @@ public class Customer {
     private String Lname;
     private String nationality;
     private char gender;
-    private String  phone;
+    private String phone;
 
     public Customer() {
 
@@ -59,27 +59,33 @@ public class Customer {
 
         int lineNum = numOfLines(numLines);
         int there = 0;
+        //int there2 = 0;
         String[][] info = new String[lineNum][];
 
         for (int i = 0; i < info.length; i++) {
             String read = raedInfo.nextLine();
             info[i] = read.split(",");
-            if (info[i][0].equals(UserName)) {
-                if (info[i][1].equals(Password)) {
+            if ((info[i][0]).equalsIgnoreCase(UserName)) {
+                if (info[i][1].equalsIgnoreCase(Password)) {
                     there++;
                     break;
                 } else {
                     System.out.println("Wrong Password ! ");
+                    //there2++;
                     break;
                 }
 
+            }else if (raedInfo.hasNext()){
+                continue;
             }else{
-                System.out.println("there is no account by this user :" + UserName + " Please Try Agaiyn !");
-                break;
+                System.out.println("There Are no account by : " + UserName + " username");
             }
+
         }
         
+        
         return there;
+
     }
 
     public static int numOfLines(Scanner Sc_read_lines) {
@@ -113,14 +119,23 @@ public class Customer {
         return lenth;
     }
 
-    public int Login(String Username, String Password, Scanner numLines, Scanner raedInfo) throws FileNotFoundException {
+
+public int Login(String Username, String Password, Scanner numLines, Scanner raedInfo) throws FileNotFoundException {
 
         this.Username = Username;
         this.Password = Password;
         int exist = CusSeachExist(numLines, raedInfo, Username, Password);
-        
+
         return exist;
 
+    }
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public void setPassword(String Password) {
+        this.Password = Password;
     }
 
     public String getUsername() {
@@ -131,7 +146,6 @@ public class Customer {
         this.Username = Username;
     }
 
-    
     public int getCus_id() {
         return Cus_id;
     }
@@ -182,7 +196,6 @@ public class Customer {
         
         int lineNum = numOfLines(userFileLine);
 
-
         String[][] info = new String[lineNum][];
 
         for (int i = 0; i < info.length; i++) {
@@ -193,19 +206,19 @@ public class Customer {
 
             if (((info[i][0]).equals(this.Username)) && ((info[i][1]).equals(this.Password))) {
 
-                System.out.printf("\n\n Username :%s  \n" , this.Username);
-                System.out.printf(" Password  :%s  \n" , this.Password);
-                System.out.printf(" First name   :%s  \n" , info[i][2].toString());
-                System.out.printf(" Last name   :%s  \n" , info[i][3].toString());
-                System.out.printf(" National number :%s\n" , info[i][4].toString());
-                System.out.printf(" Gender   :%s  \n" , info[i][5].toString() );
-                System.out.printf(" Phone number   :%s  \n" , info[i][6].toString());
-                System.out.printf(" Customer ID   :%s  \n" , info[i][7].toString());
-                System.out.printf(" Plan ID   :%s  \n" , info[i][8].toString());
-                System.out.printf(" Place   :%s  \n" , info[i][9].toString());
-                System.out.printf(" Budget   :%s  \n" , info[i][10].toString());
-                System.out.printf(" Airlane   :%s  \n\n" ,info[i][11].toString());
-                numOfReserv ++;
+                System.out.printf("\n\n Username :%s  \n", this.Username);
+                System.out.printf(" Password  :%s  \n", this.Password);
+                System.out.printf(" First name   :%s  \n", info[i][2].toString());
+                System.out.printf(" Last name   :%s  \n", info[i][3].toString());
+                System.out.printf(" National number :%s\n", info[i][4].toString());
+                System.out.printf(" Gender   :%s  \n", info[i][5].toString());
+                System.out.printf(" Phone number   :%s  \n", info[i][6].toString());
+                System.out.printf(" Customer ID   :%s  \n", info[i][7].toString());
+                System.out.printf(" Plan ID   :%s  \n", info[i][8].toString());
+                System.out.printf(" Destination   :%s  \n", info[i][9].toString());
+                System.out.printf(" Budget   :%s  \n", info[i][10].toString());
+                System.out.printf(" Airlane   :%s  \n\n", info[i][11].toString());
+                numOfReserv++;
             }
         }
 
@@ -213,20 +226,19 @@ public class Customer {
     }
 
     //(sc, Writer_cus_info, ran,u_name, Pword, Fname, Lname,nationality, gen, phone);
-    public void SignUp(Scanner readUser , Scanner gg, Scanner sc, PrintWriter print_Writer, int ran,
-            String u_name,String Pword, String Fname,
+    public void SignUp(Scanner readUser, Scanner gg, Scanner sc, PrintWriter print_Writer, int ran,
+            String u_name, String Pword, String Fname,
             String Lname, String nationality, char gender, String phone) {
-        
-        //this(u_name, Pword, Fname, Lname, nationality, gender, phone, ran, print_Writer);
 
+        //this(u_name, Pword, Fname, Lname, nationality, gender, phone, ran, print_Writer);
         while (true) {
 
             boolean val = userNSearch(sc, gg, u_name);
 
             if (val == true) {
-                
+
                 break;
-                
+
             } else {
 
                 System.out.println("Please another username enter username :");
@@ -236,7 +248,7 @@ public class Customer {
                 continue;
             }
         }
-        
+
         print_Writer.append(u_name + "," + Pword
                 + "," + Fname
                 + "," + Lname
@@ -244,9 +256,7 @@ public class Customer {
                 + "," + gender
                 + "," + phone
                 + "," + ran);
-        
-        
-        
+
     }
 
     public static boolean userNSearch(Scanner rs, Scanner file, String UserAtribute) {
@@ -255,12 +265,13 @@ public class Customer {
 
         String[][] info = new String[lineNum][];
 
-        for (int i = 0; i < info.length; i++) {
+
+for (int i = 0; i < info.length; i++) {
             String read = file.nextLine();
             info[i] = read.split(",");
             if (info[i][0].equalsIgnoreCase(UserAtribute)) {
                 return false;
-            } 
+            }
 
         }
 
@@ -268,9 +279,9 @@ public class Customer {
 
     }
 
- @Override
+    @Override
     public String toString() {
-        return "\nCutomer ID :" + Cus_id + "\nCustomer Name :" +" "+ this.Fname+this.Lname  + "\nCutomer nationality :" + this.nationality +
-                "Customer gender :" + this.gender + "Customer phone :" + this.phone;
+        return "\nCutomer ID :" + Cus_id + "\nCustomer Name :" + " " + this.Fname + this.Lname + "\nCutomer nationality :" + this.nationality
+                + "Customer gender :" + this.gender + "Customer phone :" + this.phone;
     }
 }
