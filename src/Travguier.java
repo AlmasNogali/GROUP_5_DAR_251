@@ -36,6 +36,7 @@ public class Travguier {
 //**************************************************************************************************
         Customer custm = new Customer();
         Employee employ = new Employee();
+        Reservation reserv = new Reservation();
 
         //boolean m = true;
         while (true) {
@@ -117,7 +118,68 @@ public class Travguier {
 
                                     case 3: {
                                         //Add reservations
-                                        Add_plan(sc, wr, custm);
+
+                                        System.out.print("------------------------------------------");
+                                        System.out.print("1. Choose an existing plan. ");
+                                        System.out.print("2. Scheduling a new plan. ");
+                                        System.out.print("3. Exit. ");
+
+                                        System.out.print("------------------------------------------");
+
+                                        int choise = sc.nextInt();
+
+                                        switch (choise) {
+
+                                            case 1: {
+                                                reserv.PrintReservations("Reservation_info");
+
+                                                System.out.print("Please enter the plan ID that do you want: ");
+                                                String CH_plan = sc.next();
+
+                                                String The_plan = reserv.searchReservations("Reservation_info", CH_plan);
+
+                                                String[] reser_plan = new String[4];
+                                                reser_plan = The_plan.split(",");
+
+                                                PrintWriter WriterInfo = new PrintWriter(Log_cus);
+                                                Add_plan_toCus(custm, "Cus_info.txt", WriterInfo,
+                                                        Integer.valueOf(reser_plan[0]),
+                                                        reser_plan[1],
+                                                        Integer.valueOf(reser_plan[2]),
+                                                        reser_plan[3]);
+                                                WriterInfo.close();
+
+                                                break;
+                                            }
+                                            case 2: {
+
+                                                System.out.print("Please enter the destination: ");
+                                                String place = sc.next();
+
+                                                System.out.print("Please enter your budget: ");
+                                                int budget = sc.nextInt();
+
+                                                System.out.print("Please enter the desired airline: ");
+                                                String airline = sc.next();
+
+                                                int plan_id = generatRamdomNum();
+
+                                                PrintWriter WriterInfo = new PrintWriter(Log_cus);
+                                                Add_plan_toCus(custm, "Cus_info.txt", WriterInfo, plan_id, place, budget, airline);
+                                                WriterInfo.close();
+
+                                                Add_new_plan(sc, custm, "Reservation_info.txt", plan_id, place, budget, airline);
+
+                                                break;
+                                            }
+                                            case 3: {
+                                                break;
+                                            }
+                                            default: {
+
+                                            }
+
+                                        }
 
                                         break;
                                     }
@@ -179,7 +241,6 @@ public class Travguier {
                                                                     + "," + info[i][8] + "," + newDest
                                                                     + "," + info[i][10] + "," + info[i][11];
 
-                                                          
                                                         }
                                                     }
                                                     UsersInfo.close();
@@ -239,7 +300,6 @@ public class Travguier {
                                                                     + "," + info[i][8] + "," + info[i][9]
                                                                     + "," + newBug + "," + info[i][11];
 
-                                                            
                                                         }
                                                     }
                                                     UsersInfo.close();
@@ -297,7 +357,6 @@ public class Travguier {
                                                                     + "," + info[i][8] + "," + info[i][9]
                                                                     + "," + info[i][10] + "," + newAril;
 
-                                                           
                                                         }
                                                     }
                                                     UsersInfo.close();
@@ -414,7 +473,6 @@ public class Travguier {
                                                     }
                                                     default: {
                                                         System.out.println("\n\n please choose again !");
-
                                                         System.out.println("*********************************************");
                                                         System.out.println("\n\n1. Redisplay.");
                                                         System.out.println("2. Delete reservation.");
@@ -557,39 +615,45 @@ public class Travguier {
         return id = random_int;
     }
 
-    public static void Add_plan(Scanner sc, BufferedWriter wr, Customer cu2) throws IOException {
+    public static void Add_new_plan(Scanner sc, Customer cu2, String prinFile, int plan_id, String place, int budget, String airline) throws IOException {
 
-        System.out.print("Please enter the destination: ");
-        String place = sc.next();
+        PrintWriter RrWr = new PrintWriter(new File(prinFile));
+        Reservation plan = new Reservation(plan_id, place, budget, airline, RrWr);
+        RrWr.flush();
+        RrWr.close();
 
-        System.out.print("Please enter your budget: ");
-        int budget = sc.nextInt();
+    }
 
-        System.out.print("Please enter the desired airline: ");
-        String airline = sc.next();
+    public static void Add_plan_toCus(Customer cus, String dir, PrintWriter RrWr, int plan_id, String place, int budget, String airline) {
 
-        System.out.print("Approximately how many times can you make a reservations per month?: ");
-        int r_perMonth = sc.nextInt();
+        Scanner Read_Log_cus5 = new Scanner(dir);
+        int lineNum = numOfLines(Read_Log_cus5);
+        Read_Log_cus5.close();
+        Scanner readFromFile = new Scanner(dir);
+        String[][] info = new String[lineNum][];
 
-        int plan_id = generatRamdomNum();
+        for (int i = 0; i < info.length; i++) {
 
-        Reservation plan = new Reservation(plan_id, place, budget, airline, r_perMonth);
+            String read = readFromFile.nextLine();
 
-        cu2 = new Customer();
+            info[i] = read.split(",");
 
-        cu2.addResrvation(plan);
+            if (info[i][0].equals(cus.getUsername()) && info[i][1].equals(cus.getPassword())) {
 
-        if (cu2.addResrvation(plan) == true) {
-            while (true) {
-                System.out.println("\n Your resrvation is complete!\n");
-                wr.write(plan.toString());
-                break;
+                RrWr.append(info[i][0] + "," + info[i][1]
+                        + "," + info[i][2] + "," + info[i][3]
+                        + "," + info[i][4] + "," + info[i][5]
+                        + "," + info[i][6] + "," + info[i][7]
+                        + "," + info[i][8] + "," + info[i][9]
+                        + "," + info[i][10] + "," + plan_id
+                        + "," + place + "," + budget
+                        + "," + airline);
+
             }
-        } else {
-            System.out.println("You did not enter the budget or how many reservation you want !,Please enter again: \n");
-            Add_plan(sc, wr, cu2);
+
+            readFromFile.close();
+
         }
-        wr.close();
     }
 
     public static int numOfLines(Scanner Sc_read_lines) {
