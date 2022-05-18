@@ -41,6 +41,20 @@ public class Customer {
 
     }
 
+    public boolean addResrvation(Reservation plan) {
+
+        Reservation[] p = new Reservation[plan.getR_permonth()];
+
+        if (plan.getbudget() > 0 || plan.getR_permonth() > 0) { //must enter the budget
+            for (int i = 0; i < p.length; i++) {
+                p[i] = plan;
+                return true;
+            }
+        }
+        return false;
+
+    }
+
     public int CusSeachExist(Scanner numLines, Scanner raedInfo, String UserName, String Password) {
 
         int lineNum = numOfLines(numLines);
